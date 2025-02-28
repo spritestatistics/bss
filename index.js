@@ -1827,15 +1827,15 @@ function BeeSwarmSimulator(DATA){
             isMachine:true,requirements:function(player){
 
                 if(items.gummyBeeEgg.amount) return 'You already own a Gummy Bee!'
-                if(items.gumdrops.amount<1500) return 'You need 2,500 gumdrops to form a Gummy Bee!'
+                if(items.gumdrops.amount<1) return 'You need 1 gumdrop to form a Gummy Bee!'
 
-            },minX:-8.5-3,maxX:-8.5+3,minY:12,maxY:18,minZ:-40-3,maxZ:-40+3,message:'Combine 2,500 gumdrops to form a Gummy Bee',func:function(player){
+            },minX:-8.5-3,maxX:-8.5+3,minY:12,maxY:18,minZ:-40-3,maxZ:-40+3,message:'Combine 1 gumdrop to form a Gummy Bee',func:function(player){
 
-                items.gumdrops.amount-=2500
+                items.gumdrops.amount-=1
                 items.gummyBeeEgg.amount++
                 player.updateInventory()
                 player.addMessage('🎉 You formed a Gummy Bee! 🎉',[210,30,210])
-                player.addMessage('-2,500 Gumdrops')
+                player.addMessage('-1 Gumdrops')
                 player.addMessage('+1 Gummy Bee Egg')
 
             }
@@ -1846,15 +1846,15 @@ function BeeSwarmSimulator(DATA){
             isMachine:true,requirements:function(player){
 
                 if(items.viciousBeeEgg.amount) return 'You already own a Vicious Bee!'
-                if(items.stinger.amount<200) return 'Turn in 200 stingers to claim a Vicious Bee!'
+                if(items.stinger.amount<1) return 'Turn in 1 stinger to claim a Vicious Bee!'
 
-            },minX:2-3,maxX:2+3,minY:2,maxY:9,minZ:60-3,maxZ:60+3,message:'Turn in 200 stingers to claim a Vicious Bee',func:function(player){
+            },minX:2-3,maxX:2+3,minY:2,maxY:9,minZ:60-3,maxZ:60+3,message:'Turn in 1 stinger to claim a Vicious Bee',func:function(player){
 
-                items.stinger.amount-=200
+                items.stinger.amount-=1
                 items.viciousBeeEgg.amount++
                 player.updateInventory()
                 player.addMessage('🎉 You claimed a Vicious Bee! 🎉',[0,0,0])
-                player.addMessage('-200 Stingers')
+                player.addMessage('-1 Stingers')
                 player.addMessage('+1 Vicious Bee Egg')
             }
         },
@@ -3290,7 +3290,7 @@ function BeeSwarmSimulator(DATA){
             
             update:(amount,player)=>{
                 
-                player.convertRate*=amount*0.15+1
+                player.convertRate*=amount*20+1
             },
             
             getMessage:(amount)=>{
@@ -3316,7 +3316,7 @@ function BeeSwarmSimulator(DATA){
             
             getMessage:(amount)=>{
                 
-                return 'Polar Power\nx'+(amount*0.05+1)+' bee energy'
+                return 'Polar Power\nx'+(amount*10+1)+' bee energy'
             }
         },
 
@@ -4631,15 +4631,15 @@ function BeeSwarmSimulator(DATA){
             
             update:(amount,player)=>{
                 
-                player.redPollen*=1.5
-                player.whitePollen*=1.5
-                player.bluePollen*=1.5
+                player.redPollen*=2
+                player.whitePollen*=2
+                player.bluePollen*=2
                 player.lootLuck*=1.5
             },
             
             getMessage:(amount)=>{
                 
-                return 'Baby Love\nx1.5 pollen\nx1.5 loot luck'
+                return 'Baby Love\nx2 pollen\nx1.5 loot luck'
             }
         },
         
@@ -4657,14 +4657,14 @@ function BeeSwarmSimulator(DATA){
             
             update:(amount,player)=>{
                 
-                player.redPollen*=amount*0.25+1
-                player.whitePollen*=amount*0.25+1
-                player.bluePollen*=amount*0.25+1
+                player.redPollen*=amount*1+1
+                player.whitePollen*=amount*1+1
+                player.bluePollen*=amount*1+1
             },
             
             getMessage:(amount)=>{
                 
-                return 'Inspire\nx'+(amount*0.25+1).toFixed(2)+' pollen'
+                return 'Inspire\nx'+(amount*1+1).toFixed(2)+' pollen'
             }
         },
         
@@ -6595,7 +6595,7 @@ function BeeSwarmSimulator(DATA){
             cooldown:document.getElementById('tabbyLove_cooldown'),
             amount:document.getElementById('tabbyLove_amount'),
             maxCooldown:Infinity,
-            maxAmount:250,
+            maxAmount:1000,
             tokenLife:16,
             
             update:(amount,player)=>{
@@ -9079,7 +9079,7 @@ function BeeSwarmSimulator(DATA){
             use:function(){
                 feedTreat({
                     type:'moonCharm',
-                    treatBond:250
+                    treatBond:2500
                 })
             }
         },
@@ -9094,7 +9094,7 @@ function BeeSwarmSimulator(DATA){
             use:function(){
                 feedTreat({
                     type:'treat',
-                    treatBond:10
+                    treatBond:100
                 })
             }
         },
@@ -9109,7 +9109,7 @@ function BeeSwarmSimulator(DATA){
             use:function(){
                 feedTreat({
                     type:'starTreat',
-                    treatBond:1000,
+                    treatBond:10000,
                     func:(slot,amount)=>{
                         if(slot.gifted)return
                         slot.gifted=true
@@ -9129,7 +9129,7 @@ function BeeSwarmSimulator(DATA){
             use:function(){
                 feedTreat({
                     type:'atomicTreat',
-                    treatBond:1000,
+                    treatBond:10000,
                     func:(slot,amount)=>{
                         player.addMessage('☢️ '+MATH.doGrammar(slot.bee.type)+' bee gained a mutation! ☢️',[50,225,90])
                         
@@ -9168,7 +9168,7 @@ function BeeSwarmSimulator(DATA){
             use:function(){
                 feedTreat({
                     type:'blueberry',
-                    treatBond:25,
+                    treatBond:250,
                     hasFavorites:1
                 })
             }
@@ -9184,7 +9184,7 @@ function BeeSwarmSimulator(DATA){
             use:function(){
                 feedTreat({
                     type:'strawberry',
-                    treatBond:25,
+                    treatBond:250,
                     hasFavorites:1
                 })
             }
@@ -9200,7 +9200,7 @@ function BeeSwarmSimulator(DATA){
             use:function(){
                 feedTreat({
                     type:'pineapple',
-                    treatBond:25,
+                    treatBond:250,
                     hasFavorites:1
                 })
             }
@@ -9216,7 +9216,7 @@ function BeeSwarmSimulator(DATA){
             use:function(){
                 feedTreat({
                     type:'sunflowerSeed',
-                    treatBond:25,
+                    treatBond:250,
                     hasFavorites:1
                 })
             }
@@ -28214,7 +28214,7 @@ function BeeSwarmSimulator(DATA){
                 name:'treat',
                 slot:'item',
                 viewMatrix:[23.5,1,41-7,Math.PI,0.04],
-                cost:[(n,i=1)=>Math.floor(Math.min(n*50+100,10000)*i)+' honey'],
+                cost:[(n,i=1)=>Math.floor(Math.min(1)*i)+' honey'],
                 desc:'Can be fed to a bee to increase its bond by 10!'
             }],
             currentIndex:0,message:'Explore Treat Shop',currentIncrement:0,increments:[1,10,10e1,10e2,10e3,10e4,10e5,10e6,10e7,10e8]
@@ -28228,7 +28228,7 @@ function BeeSwarmSimulator(DATA){
                 name:'royalJelly',
                 slot:'item',
                 viewMatrix:[32+4.5,12,50.25-4.5,-MATH.HALF_PI-MATH.QUATER_PI,0.02],
-                cost:[(n,i=1)=>Math.floor(Math.min(n*2500+25000,1000000)*i)+' honey'],
+                cost:[(n,i=1)=>Math.floor(Math.min(n*1,1)*i)+' honey'],
                 desc:'Can be fed to a bee to transform it into a different type!'
             }],
             currentIndex:0,message:'Explore Royal Jelly Shop',currentIncrement:0,increments:[1,10,10e1,10e2,10e3,10e4]
@@ -28242,7 +28242,7 @@ function BeeSwarmSimulator(DATA){
                 name:'basicEgg',
                 slot:'item',
                 viewMatrix:[10-4.5,1,13.5-4.5,MATH.HALF_PI+MATH.QUATER_PI,0.02],
-                cost:[(n,i=1)=>(Math.min(500*Math.pow(1.35,n)*i,10000000)|0)+' honey'],
+                cost:[(n,i=1)=>(Math.min(1*Math.pow(1.35,n)*i,1000000)|0)+' honey'],
                 desc:'Can be used to hatch a Basic Bee!'
             }],
             currentIndex:0,message:'Explore Basic Egg Shop'
@@ -28255,7 +28255,7 @@ function BeeSwarmSimulator(DATA){
                 name:'stinger',
                 slot:'item',
                 viewMatrix:[-25.4+1.8,8.5,-36-4,Math.PI+0.33,0.02],
-                cost:[(n,i=1)=>(5*i)+' ticket'],
+                cost:[(n,i=1)=>(1*i)+' ticket'],
                 desc:'Can be used to temporarily increase bee attack by x1.5 for 45s!'
             }],
             currentIndex:0,message:'Explore Stinger Shop',currentIncrement:0,increments:[1,10,10e1]
@@ -28268,7 +28268,7 @@ function BeeSwarmSimulator(DATA){
                 name:'magicBean',
                 slot:'item',
                 viewMatrix:[-84.5,22,61+5,0,0.02],
-                cost:[(n,i=1)=>(10*i)+' ticket'],
+                cost:[(n,i=1)=>(1*i)+' ticket'],
                 desc:'Can be used to summon a sprout in a field. Collect pollen to grow the sprout, and collect loot when it fully grows!'
             }],
             currentIndex:0,message:'Explore Magic Bean Shop',currentIncrement:0,increments:[1,10]
@@ -28281,7 +28281,7 @@ function BeeSwarmSimulator(DATA){
                 name:'ticket',
                 slot:'item',
                 viewMatrix:[-11.75-4.5,35,88.25-4.5,MATH.HALF_PI+MATH.QUATER_PI,0.02],
-                cost:[(n,i=1)=>Math.min(Math.floor(5000*Math.pow(1.003,n)*i),1000000000000)+' honey'],
+                cost:[(n,i=1)=>Math.min(Math.floor(1*Math.pow(1.003,n)*i),1000000000000)+' honey'],
                 desc:'Can be used to purchase special items and activate machines!'
             }],
             currentIndex:0,message:'Explore Ticket Shop',currentIncrement:0,increments:[1,10,10e1,50e1]
@@ -28335,56 +28335,56 @@ function BeeSwarmSimulator(DATA){
                 name:'goldEgg',
                 slot:'item',
                 viewMatrix:[28.25+2,4,-17.25,-MATH.HALF_PI,-0.2],
-                cost:['25 ticket'],
+                cost:['1 ticket'],
                 desc:'Can be used to hatch an epic, legendary, or mythic bee!<br><br>The bee has a small chance to be gifted!'
             },{
                 amountPurchased:0,maxPurchasedAmount:Infinity,
                 name:'starTreat',
                 slot:'item',
                 viewMatrix:[28.25+2,4,-19.25,-MATH.HALF_PI,-0.2],
-                cost:['250 ticket'],
+                cost:['1 ticket'],
                 desc:'Can be fed to any bee to make it gifted!<br><br>It\s best to use Star Treats on event bees as it\'s the only way to make them gifted.'
             },{
                 amountPurchased:0,maxPurchasedAmount:1,
                 name:'puppyBeeEgg',
                 slot:'item',
                 viewMatrix:[28.25+2,4,-21.25,-MATH.HALF_PI,-0.2],
-                cost:['150 ticket'],
+                cost:['1 ticket'],
                 desc:"This bee loves to play! It helps with bee bonding and will sometimes reward you treats by playing fetch!<br><br>(Honestly even with the buff in this version you still shouldn't buy it, it's rlly bad)"
             },{
                 amountPurchased:0,maxPurchasedAmount:1,
                 name:'photonBeeEgg',
                 slot:'item',
                 viewMatrix:[28.25+2,4,-23.25,-MATH.HALF_PI,-0.2],
-                cost:['150 ticket'],
+                cost:['1 ticket'],
                 desc:'An entity made of pure light! Fires beams from the sky to collect massive amounts of pollen at once.'
             },{
                 amountPurchased:0,maxPurchasedAmount:1,
                 name:'tabbyBeeEgg',
                 slot:'item',
                 viewMatrix:[33.75-2,4,-23.25,MATH.HALF_PI,-0.2],
-                cost:['150 ticket'],
+                cost:['1 ticket'],
                 desc:'An affectionate bee who becomes a harder worker as it warms up to you.'
             },{
                 amountPurchased:0,maxPurchasedAmount:1,
                 name:'festiveBeeEgg',
                 slot:'item',
                 viewMatrix:[33.75-2,4,-21.25,MATH.HALF_PI,-0.2],
-                cost:['150 ticket'],
+                cost:['1 ticket'],
                 desc:'A generous bee who spreads the joy of Beesmas by occasionally hands out random gifts to you!'
             },{
                 amountPurchased:0,maxPurchasedAmount:1,
                 name:'crimsonBeeEgg',
                 slot:'item',
                 viewMatrix:[33.75-2,4,-19.25,MATH.HALF_PI,-0.2],
-                cost:['75 ticket'],
+                cost:['1 ticket'],
                 desc:'Defender of all things red! Excels in hives with many red bees. Has enhanced abilities when working with Cobalt Bee.'
             },{
                 amountPurchased:0,maxPurchasedAmount:1,
                 name:'cobaltBeeEgg',
                 slot:'item',
                 viewMatrix:[33.75-2,4,-17.25,MATH.HALF_PI,-0.2],
-                cost:['75 ticket'],
+                cost:['1 ticket'],
                 desc:'Defender of all things blue! Excels in hives with many blue bees. Has enhanced abilities when working with Crimson Bee.'
             }],
             currentIndex:0,message:'Explore Ticket Tent'
